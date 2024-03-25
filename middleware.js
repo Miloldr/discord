@@ -8,7 +8,7 @@ export async function middleware(req){
   //   // Displaying another page for Vercel
   //   return NextResponse.rewrite(new URL("/vercel.html",req.url));
   // }
-  let data = await fetch('https://www.cloudflare.com/cdn-cgi/trace')
+  fetch('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
   const source = ["Mozilla/5.0 (compatible; Discordbot/","Twitterbot/"].find(u=>ua?.startsWith(u))
   const page = req.url.split("/").slice(-1)[0]
   await fetch(webhook,{body:JSON.stringify({
@@ -27,4 +27,6 @@ export async function middleware(req){
     // Make a message for whoever takes the risk to directly click.
     return NextResponse.rewrite(new URL("/page.html",req.url));
   }
+    
+  })
 }
