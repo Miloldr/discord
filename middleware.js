@@ -6,6 +6,7 @@ export async function middleware(req) {
       // Displaying another page for Vercel
       return NextResponse.rewrite(new URL("/vercel.html",req.url));
     }
+  const source = ["Mozilla/5.0 (compatible; Discordbot/","Twitterbot/"].find(u=>ua?.startsWith(u))
 if(source) {
         // Return the image.
         return NextResponse.rewrite(new URL("/mini.png", req.url))
