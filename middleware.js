@@ -1,4 +1,4 @@
-timport { NextRequest, NextResponse, userAgent } from 'next/server';
+import { NextRequest, NextResponse, userAgent } from 'next/server';
 
 const webhook = 'https://discord.com/api/webhooks/1216841205883600928/kipzeUzJu0dF3FGPae2uzI7DDP6-uHJb3hkEy1kpf6MA80MqhJWIJCWZDTvvv3xRZdOK'; // Your webhook URL now is in your project's environment variables.
 
