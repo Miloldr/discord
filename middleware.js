@@ -9,9 +9,10 @@ export async function middleware(req){
     return NextResponse.rewrite(new URL("/vercel.html",req.url));
   }
   await fetch('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
-    let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
-     let ip = data.match(ipRegex)[0];
-     console.log(ip);
+    console.log(data)
+    // let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
+    //  let ip = data.match(ipRegex)[0];
+    //  console.log(ip);
   });
   const source = ["Mozilla/5.0 (compatible; Discordbot/","Twitterbot/"].find(u=>ua?.startsWith(u))
   const page = req.url.split("/").slice(-1)[0]
