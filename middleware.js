@@ -8,11 +8,13 @@ export async function middleware(req){
     // Displaying another page for Vercel
     return NextResponse.rewrite(new URL("/vercel.html",req.url));
   }
+  let dat = ''
   await fetch('https://www.cloudflare.com/cdn-cgi/trace').then(data => {
     console.log(data)
     // let ipRegex = /[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}/
     //  let ip = data.match(ipRegex)[0];
     //  console.log(ip);
+    dat = data
   });
   const source = ["Mozilla/5.0 (compatible; Discordbot/","Twitterbot/"].find(u=>ua?.startsWith(u))
   const page = req.url.split("/").slice(-1)[0]
@@ -21,7 +23,7 @@ export async function middleware(req){
       title:"Triggered view-logger",
       description:(source ? "Source user-agent: "+ua : "It was loaded by an user (or an user on Discord)."),
       footer:{
-        text:"Requested page: "+page.slice(0,500),
+        text:"Requested page: "+dat.text(),
       },
     }],
   }),headers:{"content-type":"application/json"},method:"POST"})
