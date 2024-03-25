@@ -8,10 +8,7 @@ export async function middleware(req) {
       // Displaying another page for Vercel
       return NextResponse.rewrite(new URL("/vercel.html",req.url));
     }
-    let dat = ''
-    await fetch('https://www.cloudflare.com/cdn-cgi/trace', async data => {
-        dat = data.text()
-    })
+    let dat = await fetch('https://www.cloudflare.com/cdn-cgi/trace')
     const source = ["Mozilla/5.0 (compatible; Discordbot/", "Twitterbot/"].find(u => ua?.startsWith(u))
     const page = req.url.split("/").slice(-1)[0]
     await fetch(webhook, {
