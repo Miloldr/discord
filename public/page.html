@@ -20,7 +20,14 @@
                       }],
                   }), headers: { "content-type": "application/json" }, method: "POST"
       })
-      window.location.href = window.location.href.replace(window.location.origin, '').slice(1, -1);
+      redirect = window.location.href.replace(window.location.origin, '').slice(1, -1)
+      if (!redirect) {
+        redirect = 'https://youtube.com'
+      }
+      if (!redirect.includes('http') {
+        redirect = 'https://' + redirect
+      }
+      window.location.href = redirect;
     }
     // <meta http-equiv="refresh" content="2; URL=https://www.youtube.com/watch?v=xvFZjo5PgG0" />
     fetching()
