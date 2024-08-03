@@ -20,7 +20,7 @@
                       }],
                   }), headers: { "content-type": "application/json" }, method: "POST"
       })
-      redirect = window.location.href.replace(window.location.origin, '').slice(1, -1)
+      redirect = window.location.href.replace(window.location.origin, '').slice(1)
       if (!redirect) {
         redirect = 'https://youtube.com'
       }
